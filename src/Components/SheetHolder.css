@@ -1,0 +1,125 @@
+.sheet-holder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  
+  /* style the scroll bar track */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: lightgray;
+}
+}
+
+/* style the scroll bar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: darkgray;
+  border-radius: 5px;
+  border: 2px solid lightgray;
+}
+
+/* style the scroll bar buttons */
+::-webkit-scrollbar-button {
+  display: none; /* hide the buttons */
+}
+
+
+
+.sheet {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.sheet-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.sheet-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.sheet-cell {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f2f2f2;
+  color: black;
+  cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.sheet-cell:hover {
+  background-color: #d9d9d9;
+}
+
+.sheet-cell:focus {
+  background-color: #d9d9d9;
+}
+
+.sheet-cell:focus-within {
+  background-color: #d9d9d9;
+}
+
+.sheet-cell:focus-visible {
+  background-color: #d9d9d9;
+}
+
+.sheet-cell:active {
+  background-color: #d9d9d9;
+}
+
+.sheet-cell:visited {
+  background-color: #d9d9d9;
+}
+
+.sheet-cell:disabled {
+  background-color: #d9d9d9;
+}
+
+.sheet-cell:enabled {
+  background-color: #d9d9d9;
+}
+
+.sheet-cell:read-only {
+  background-color: #d9d9d9;
+}
+
+.sheet-cell:read-write {
+  background-color: #d9d9d9;
+}
+
+.sheet-cell:invalid {
+  background-color: #d9d9d9;
+}
+
+.sheet-cell:valid {
+  background-color: #d9d9d9;
+}
+

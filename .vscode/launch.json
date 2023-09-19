@@ -1,0 +1,102 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach",
+      "port": 9229
+    },
+    {
+      "type": "node-terminal",
+      "name": "Start Calculator",
+      "request": "launch",
+      "command": "npm run start",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Build code",
+      "request": "launch",
+      "command": "npm run build",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Start Data Server",
+      "request": "launch",
+      "command": "npm run start-server",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Start Public Server",
+      "request": "launch",
+      "command": "HOST=0.0.0.0 npm run start-server",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Test Data Server",
+      "request": "launch",
+      "command": "npm run test-server",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Run Script: eject",
+      "request": "launch",
+      "command": "npm run eject",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Jest Machine",
+      "request": "launch",
+      "command": "npx jest MachineSimple",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Jest Memory",
+      "request": "launch",
+      "command": "npx jest SheetMemory",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Jest Cell",
+      "request": "launch",
+      "command": "npx jest Cell",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Jest Calculation",
+      "request": "launch",
+      "command": "npx jest CalculationManager",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Jest DocumentHolder",
+      "request": "launch",
+      "command": "npx jest DocumentHolder",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Jest SpreadSheet",
+      "request": "launch",
+      "command": "npx jest SpreadSheet --runInBand",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Jest coverage",
+      "request": "launch",
+      "command": "npx jest --coverage",
+      "cwd": "${workspaceFolder}"
+    },
+  ]
+}
