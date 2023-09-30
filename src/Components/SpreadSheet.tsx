@@ -32,7 +32,11 @@ function SpreadSheet({ documentName }: SpreadSheetProps) {
 
 
   function updateDisplayValues(): void {
-    spreadSheetClient.userName = userName;
+    if (!userName) {
+      spreadSheetClient.userName = "default";
+    } else {
+      spreadSheetClient.userName = userName;
+    }
     spreadSheetClient.documentName = documentName;
     setFormulaString(spreadSheetClient.getFormulaString());
     setResultString(spreadSheetClient.getResultString());
@@ -60,10 +64,15 @@ function SpreadSheet({ documentName }: SpreadSheetProps) {
         onChange={(event) => {
           // get the text from the input
           let userName = event.target.value;
+
           window.sessionStorage.setItem('userName', userName);
           // set the user name
           setUserName(userName);
-          spreadSheetClient.userName = userName;
+          if (!userName) {
+            spreadSheetClient.userName = "default";
+          } else {
+            spreadSheetClient.userName = userName;
+          }
         }} />
     </div>
 
@@ -82,7 +91,10 @@ function SpreadSheet({ documentName }: SpreadSheetProps) {
    * the other buttons do require asynchronous processing and so the function is marked async
    */
   async function onCommandButtonClick(text: string): Promise<void> {
-
+    if (!userName) {
+      alert("Please enter a user name");
+      return;
+    }
 
     switch (text) {
       case ButtonNames.edit_toggle:
@@ -116,7 +128,10 @@ function SpreadSheet({ documentName }: SpreadSheetProps) {
    * 
    * */
   function onButtonClick(event: React.MouseEvent<HTMLButtonElement>): void {
-
+    if (!userName) {
+      alert("Please enter a user name");
+      return;
+    }
     const text = event.currentTarget.textContent;
     let trueText = text ? text : "";
     spreadSheetClient.setEditStatus(true);
@@ -136,7 +151,10 @@ function SpreadSheet({ documentName }: SpreadSheetProps) {
    * If the edit status is false then it will ask the machine to update the current formula.
    */
   function onCellClick(event: React.MouseEvent<HTMLButtonElement>): void {
-
+    if (!userName) {
+      alert("Please enter a user name");
+      return;
+    }
     const cellLabel = event.currentTarget.getAttribute("cell-label");
     // calculate the current row and column of the clicked on cell
 
