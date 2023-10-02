@@ -64,6 +64,7 @@ function SpreadSheet({ documentName }: SpreadSheetProps) {
         onChange={(event) => {
           // get the text from the input
           let userName = event.target.value;
+          console.log("userName: ", userName);
 
           window.sessionStorage.setItem('userName', userName);
           // set the user name

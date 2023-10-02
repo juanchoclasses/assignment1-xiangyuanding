@@ -12,11 +12,14 @@ export class FormulaEvaluator {
   private _lastResult: number = 0;
   private _sheetMemory: SheetMemory;
   private _result: number = 0;
+  private _errorCode = 1;
 
 
   constructor(memory: SheetMemory) {
     this._sheetMemory = memory;
   }
+
+ 
 
   /**
     * place holder for the evaluator.   I am not sure what the type of the formula is yet 
@@ -43,15 +46,66 @@ export class FormulaEvaluator {
     * 
    */
 
+  calculator(formula: FormulaType) {
+    let temp = [...formula];
+    for (let i = 0; i < temp.length; i++) {
+      if (this.isCellReference(temp[i])) {
+        let value = this.getCellValue(temp[i])[0];
+        if (this.getCellValue(temp[i])[1]!=""){
+          if (this.getCellValue(temp[i])[1]==ErrorMessages.invalidCell){
+            this._errorCode = 9;
+          } else {
+            this._errorCode = 11;
+          }
+          
+        }
+        temp[i] = value;
+      }
+    }
+    let result = "";
+
+    for (let i = 0; i < temp.length; i++) {
+      result += temp[i];
+    }
+    console.log(result)
+    console.log(eval(result))
+    let evalReturn = eval(result)
+    return evalReturn;
+  }
+
   evaluate(formula: FormulaType) {
-
-
+    this._errorCode = 1;
     // set the this._result to the length of the formula
+    console.log(formula)
+    if (formula.length === 0) {
+      this._errorCode = 0;
+    }
+    for (let i = 0; i < formula.length-1; i++) {
+      if (formula[i] === "(" && formula[i + 1] === ")") {
+        this._errorCode = 13;
+      }
+    }
+    if (this._errorCode!==13 && this._errorCode!==0){
+      try{
+        this._result = this.calculator(formula);
+      } catch (e) {
+        this._errorCode = 10;
+        for (let i = 1; i < formula.length; i++) {
+          try {
+            this._result = this.calculator(formula.slice(0, formula.length - i));
+            break;
+          } catch (e){}
+        }
 
-    this._result = formula.length;
-    this._errorMessage = "";
+      }
+    }
 
-    switch (formula.length) {
+    
+    if (this._result === Infinity) {
+      this._errorCode = 8;
+    }
+
+    switch (this._errorCode) {
       case 0:
         this._errorMessage = ErrorMessages.emptyFormula;
         break;
@@ -92,8 +146,7 @@ export class FormulaEvaluator {
 
 
 
-
-  /**
+ /**
    * 
    * @param token 
    * @returns true if the toke can be parsed to a number
@@ -101,6 +154,7 @@ export class FormulaEvaluator {
   isNumber(token: TokenType): boolean {
     return !isNaN(Number(token));
   }
+
 
   /**
    * 

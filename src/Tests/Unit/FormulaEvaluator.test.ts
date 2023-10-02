@@ -74,7 +74,6 @@ describe("FormulaEvaluator", () => {
       });
     });
 
-
     describe("when the formula contains two tokens, number, operator", () => {
       it("returns the number", () => {
         const formula: FormulaType = ["1", "+"];
@@ -112,7 +111,7 @@ describe("FormulaEvaluator", () => {
           let result = recalc.result;
           let error = recalc.error;
 
-          expect(result).toEqual(3);
+          expect(result).toEqual(-1);
           expect(error).toEqual("");
         });
       });
@@ -128,7 +127,7 @@ describe("FormulaEvaluator", () => {
           let result = recalc.result;
           let error = recalc.error;
 
-          expect(result).toEqual(3);
+          expect(result).toEqual(2);
           expect(error).toEqual("");
         });
       });
@@ -312,7 +311,7 @@ describe("FormulaEvaluator", () => {
 
     describe("when the formula is 1 * ) ", () => {
       it("returns the number", () => {
-        const formula = ["1", "+", "+"];
+        const formula = ["1", "*", ")"];
 
         recalc.evaluate(formula);
 
