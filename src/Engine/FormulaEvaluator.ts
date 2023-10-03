@@ -51,6 +51,8 @@ export class FormulaEvaluator {
     for (let i = 0; i < temp.length; i++) {
       if (this.isCellReference(temp[i])) {
         let value = this.getCellValue(temp[i])[0];
+
+        // if the cell has an error change the error code to certain numeber
         if (this.getCellValue(temp[i])[1]!=""){
           if (this.getCellValue(temp[i])[1]==ErrorMessages.invalidCell){
             this._errorCode = 9;
@@ -63,20 +65,16 @@ export class FormulaEvaluator {
       }
     }
     let result = "";
-
+    //convert the formula to a string
     for (let i = 0; i < temp.length; i++) {
       result += temp[i];
     }
-    console.log(result)
-    console.log(eval(result))
     let evalReturn = eval(result)
     return evalReturn;
   }
 
   evaluate(formula: FormulaType) {
     this._errorCode = 1;
-    // set the this._result to the length of the formula
-    console.log(formula)
     if (formula.length === 0) {
       this._errorCode = 0;
     }
@@ -85,11 +83,13 @@ export class FormulaEvaluator {
         this._errorCode = 13;
       }
     }
+    //if the error is missing parentheses or empty formula, do not try to calculate
     if (this._errorCode!==13 && this._errorCode!==0){
       try{
         this._result = this.calculator(formula);
       } catch (e) {
         this._errorCode = 10;
+        //raise error but at the same time produce a result
         for (let i = 1; i < formula.length; i++) {
           try {
             this._result = this.calculator(formula.slice(0, formula.length - i));
